@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'rentals-api';
+  loadedFeature = 'properties';
+  
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
+  }
+
 }

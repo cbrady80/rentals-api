@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Tenant } from './tenant.model';
 
 @Component({
   selector: 'app-tenants',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './tenants.component.css'
 })
 export class TenantsComponent {
-
+  selectedTenant: Tenant;
 }

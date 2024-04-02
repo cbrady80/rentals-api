@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Property } from '../property.model';
 
 @Component({
   selector: 'app-property-details',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './property-details.component.css'
 })
 export class PropertyDetailsComponent {
+  @Input() property: Property;
 
 }

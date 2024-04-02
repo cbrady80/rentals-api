@@ -1,11 +1,19 @@
 <div class="row">
     <div class="col-xs-12">
-        <h1>Tenant Name</h1>
+        <h1>{{ tenant.name }}</h1>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-        Tenant Details
+        <h3>Tenant Details</h3>
+        <p>Phone: {{tenant.phone}}</p>
+        <p>Email: {{tenant.email}}</p>
+        <p>Property: {{tenant.property}}</p>
+        <p>Current Rent: {{tenant.current_rent}}</p>
+        <p>Current Lease: {{tenant.lease_period}}</p>
+        <p>Emergency Contact: {{tenant.emergency_contact}}</p>
+        <p>Co-Tenants: {{tenant.co_tenants}}</p>
+        <p>Pets: {{tenant.pets}}</p>
     </div>
 </div>
 <div class="row">

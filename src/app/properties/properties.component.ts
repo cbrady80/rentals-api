@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Property } from './property.model';
 
 @Component({
   selector: 'app-properties',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './properties.component.css'
 })
 export class PropertiesComponent {
+  selectedProperty: Property;
 
 }

@@ -1,16 +1,21 @@
 <div class="row">
     <div class="col-xs-12">
-        <img src="" alt="" class="img-responsive">
+        <img [src]="property.imagePath" alt="Property Image" class="img-responsive">
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <h1>Property Address</h1>
+        <h1>{{ property.address }}</h1>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-        Property Details
+        <h3>Property Details</h3>
+        <p>Current Tenant(s): {{ property.current_tenants }}</p>
+        <p>Current Rent: {{ property.current_rent }}</p>
+        <p>Description: {{ property.description }}</p>
+        <p>Notes: {{ property.notes }}</p>
+
     </div>
 </div>
 <div class="row">

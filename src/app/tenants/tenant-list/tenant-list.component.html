@@ -6,18 +6,11 @@
 <hr>
 <div class="row">
     <div class="col-xs-12">
-        <a href="#" 
-            class="list-group-item clearfix" 
-            *ngFor="let tenant of tenants"
-        >
-            <div class="pull-left">
-                <h4 class="list-group-item-heading">{{ tenant.name }}</h4>
-                <p class="list-group-item-text">{{ tenant.phone }}</p>
-            </div>
-        </a>
-        <app-tenant-item></app-tenant-item>
+        <app-tenant-item
+            *ngFor="let tenantElement of tenants"
+            [tenant]="tenantElement"
+            (tenantSelected)="onTenantSelected(tenantElement)">
+        </app-tenant-item>
     </div>
 </div>
-
-
 

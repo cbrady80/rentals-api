@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Tenant } from '../tenant.model';
 
 @Component({
@@ -7,6 +7,8 @@ import { Tenant } from '../tenant.model';
   styleUrl: './tenant-list.component.css'
 })
 export class TenantListComponent implements OnInit {
+  @Output() tenantWasSelected = new EventEmitter<Tenant>();
+  
   tenants: Tenant[] = [
     new Tenant(
       'Gwyn Buescher',
@@ -16,7 +18,8 @@ export class TenantListComponent implements OnInit {
       '$1300',
       '6/1/23 - 5/31/24',
       'none',
-      'daughter 801-123-4321'
+      'daughter 801-123-4321',
+      'none'
     ),
     new Tenant(
       'Shawn Breeland',
@@ -26,7 +29,8 @@ export class TenantListComponent implements OnInit {
       '$1300',
       '6/1/23 - 5/31/24',
       'none',
-      'dad 801-123-4321'
+      'dad 801-123-4321',
+      'none'
     )
   ];
 
@@ -34,5 +38,9 @@ export class TenantListComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+
+  onTenantSelected(tenant: Tenant) {
+    this.tenantWasSelected.emit(tenant);
   }
 }

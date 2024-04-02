@@ -8,8 +8,7 @@
     <div class="col-xs-12">
         <app-property-item 
             *ngFor="let propertyElement of properties"
-            [property]="propertyElement"
-            (propertySelected)="onPropertySelected(propertyElement)">
+            [property]="propertyElement">
         </app-property-item>
     </div>
 </div>

@@ -8,8 +8,7 @@
     <div class="col-xs-12">
         <app-tenant-item
             *ngFor="let tenantElement of tenants"
-            [tenant]="tenantElement"
-            (tenantSelected)="onTenantSelected(tenantElement)">
+            [tenant]="tenantElement">
         </app-tenant-item>
     </div>
 </div>

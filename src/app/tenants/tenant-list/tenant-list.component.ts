@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Tenant } from '../tenant.model';
+import { TenantsService } from '../tenants.service';
 
 @Component({
   selector: 'app-tenant-list',
@@ -7,40 +8,12 @@ import { Tenant } from '../tenant.model';
   styleUrl: './tenant-list.component.css'
 })
 export class TenantListComponent implements OnInit {
-  @Output() tenantWasSelected = new EventEmitter<Tenant>();
-  
-  tenants: Tenant[] = [
-    new Tenant(
-      'Gwyn Buescher',
-      '801-234-1234',
-      'gwyn@email.com',
-      '87 E 9270 S, Sandy',
-      '$1300',
-      '6/1/23 - 5/31/24',
-      'none',
-      'daughter 801-123-4321',
-      'none'
-    ),
-    new Tenant(
-      'Shawn Breeland',
-      '801-567-8901',
-      'shawn@email.com',
-      '89 E 9270 S, Sandy',
-      '$1300',
-      '6/1/23 - 5/31/24',
-      'none',
-      'dad 801-123-4321',
-      'none'
-    )
-  ];
+  tenants: Tenant[] = [];
 
-  constructor() {  }
+  constructor(private tenantsService: TenantsService) {  }
 
   ngOnInit(): void {
-    
+    this.tenants = this.tenantsService.getTenants();
   }
 
-  onTenantSelected(tenant: Tenant) {
-    this.tenantWasSelected.emit(tenant);
-  }
 }

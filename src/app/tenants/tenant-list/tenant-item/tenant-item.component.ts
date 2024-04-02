@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Tenant } from '../../tenant.model';
+import { TenantsService } from '../../tenants.service';
 
 @Component({
   selector: 'app-tenant-item',
@@ -8,15 +9,14 @@ import { Tenant } from '../../tenant.model';
 })
 export class TenantItemComponent implements OnInit {
   @Input() tenant: Tenant;
-  @Output() tenantSelected = new EventEmitter<void>();
 
-  constructor() {}
+  constructor(private tenantsService: TenantsService) {}
 
   ngOnInit(): void {
     
   }
 
   onSelected() {
-    this.tenantSelected.emit();
+    this.tenantsService.tenantSelected.emit(this.tenant);
   }
 }

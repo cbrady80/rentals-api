@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Property } from './property.model';
+
 import { PropertiesService } from './properties.service';
 
 @Component({
@@ -9,17 +9,11 @@ import { PropertiesService } from './properties.service';
   providers: [PropertiesService]
 })
 export class PropertiesComponent implements OnInit {
-  selectedProperty: Property;
 
-  constructor(private propertiesService: PropertiesService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.propertiesService.propertySelected
-      .subscribe(
-        (property: Property) => {
-          this.selectedProperty = property;
-        }
-      );
+   
   }
 
 }

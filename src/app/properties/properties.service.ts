@@ -1,12 +1,11 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Property } from './property.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropertiesService {
-  propertySelected = new EventEmitter<Property>();
-
+ 
   private properties: Property[] = [
     new Property(
       '87 East 9270 South, Sandy',

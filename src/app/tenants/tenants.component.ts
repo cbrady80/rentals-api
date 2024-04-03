@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Tenant } from './tenant.model';
+
 import { TenantsService } from './tenants.service';
 
 @Component({
@@ -9,16 +9,10 @@ import { TenantsService } from './tenants.service';
   providers: [TenantsService]
 })
 export class TenantsComponent implements OnInit {
-  selectedTenant: Tenant;
 
-  constructor(private tenantsService: TenantsService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.tenantsService.tenantSelected
-      .subscribe(
-        (tenant: Tenant) => {
-          this.selectedTenant = tenant;
-        }
-      )
+    
   }
 }

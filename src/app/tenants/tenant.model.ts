@@ -9,6 +9,7 @@ export class Tenant {
         public lease_period: string,
         public co_tenants: string, //may need to be an []
         public emergency_contact: string,
-        public pets: string
+        public pets: string,
+        public notes: string
     ) {}
 }

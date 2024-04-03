@@ -1,11 +1,10 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Tenant } from './tenant.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TenantsService {
-  tenantSelected = new EventEmitter<Tenant>();
 
   private tenants: Tenant[] = [
     new Tenant(
@@ -17,7 +16,8 @@ export class TenantsService {
       '6/1/23 - 5/31/24',
       'none',
       'daughter 801-123-4321',
-      'none'
+      'none',
+      'Single older lady.'
     ),
     new Tenant(
       'Shawn Breeland',
@@ -28,7 +28,8 @@ export class TenantsService {
       '6/1/23 - 5/31/24',
       'none',
       'dad 801-123-4321',
-      'none'
+      'none',
+      'Single male, has a young son.'
     )
   ];
 

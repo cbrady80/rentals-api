@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +18,7 @@ import { PropertyItemComponent } from './properties/properties-list/property-ite
 import { TenantItemComponent } from './tenants/tenant-list/tenant-item/tenant-item.component';
 import { PropertyStartComponent } from './properties/property-start/property-start.component';
 import { TenantStartComponent } from './tenants/tenant-start/tenant-start.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { TenantStartComponent } from './tenants/tenant-start/tenant-start.compon
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

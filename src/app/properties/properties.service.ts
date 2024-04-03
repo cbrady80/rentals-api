@@ -31,4 +31,8 @@ export class PropertiesService {
   getProperties() {
     return this.properties.slice();
   }
+
+  getProperty(index: number) {
+    return this.properties[index];
+  }
 }

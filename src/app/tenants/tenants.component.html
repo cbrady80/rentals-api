@@ -3,12 +3,6 @@
         <app-tenant-list></app-tenant-list>
     </div>
     <div class="col-md-7">
-        <app-tenant-details
-            *ngIf="selectedTenant; else infoText"
-            [tenant]="selectedTenant">
-        </app-tenant-details>
-        <ng-template #infoText>
-            <p>** Please select a tenant **</p>
-        </ng-template>
+        <router-outlet></router-outlet>
     </div>
 </div>

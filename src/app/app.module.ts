@@ -14,6 +14,8 @@ import { TenantEditComponent } from './tenants/tenant-edit/tenant-edit.component
 import { TenantDetailsComponent } from './tenants/tenant-details/tenant-details.component';
 import { PropertyItemComponent } from './properties/properties-list/property-item/property-item.component';
 import { TenantItemComponent } from './tenants/tenant-list/tenant-item/tenant-item.component';
+import { PropertyStartComponent } from './properties/property-start/property-start.component';
+import { TenantStartComponent } from './tenants/tenant-start/tenant-start.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { TenantItemComponent } from './tenants/tenant-list/tenant-item/tenant-it
     TenantEditComponent,
     TenantDetailsComponent,
     PropertyItemComponent,
-    TenantItemComponent
+    TenantItemComponent,
+    PropertyStartComponent,
+    TenantStartComponent
   ],
   imports: [
     BrowserModule,

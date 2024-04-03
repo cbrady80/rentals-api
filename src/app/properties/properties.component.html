@@ -3,12 +3,6 @@
         <app-properties-list></app-properties-list>
     </div>
     <div class="col-md-7">
-        <app-property-details
-            *ngIf="selectedProperty; else infoText"
-            [property]="selectedProperty">
-        </app-property-details>
-        <ng-template #infoText>
-            <p>** Please select a property **</p>
-        </ng-template>
+        <router-outlet></router-outlet>
     </div>
 </div>

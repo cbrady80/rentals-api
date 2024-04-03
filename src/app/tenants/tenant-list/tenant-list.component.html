@@ -1,14 +1,15 @@
 <div class="row">
     <div class="col-xs-12">
-        <button class="btn btn-success">Add A Tenant</button>
+        <button class="btn btn-success" (click)="onAddTenant()">Add A Tenant</button>
     </div>
 </div>
 <hr>
 <div class="row">
     <div class="col-xs-12">
         <app-tenant-item
-            *ngFor="let tenantElement of tenants"
-            [tenant]="tenantElement">
+            *ngFor="let tenantElement of tenants; let i = index"
+            [tenant]="tenantElement"
+            [index]="i">
         </app-tenant-item>
     </div>
 </div>

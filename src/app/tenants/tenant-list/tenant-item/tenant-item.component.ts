@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Tenant } from '../../tenant.model';
-import { TenantsService } from '../../tenants.service';
 
 @Component({
   selector: 'app-tenant-item',
@@ -9,14 +8,12 @@ import { TenantsService } from '../../tenants.service';
 })
 export class TenantItemComponent implements OnInit {
   @Input() tenant: Tenant;
+  @Input() index: number;
 
-  constructor(private tenantsService: TenantsService) {}
+  constructor() {}
 
   ngOnInit(): void {
     
   }
 
-  onSelected() {
-    this.tenantsService.tenantSelected.emit(this.tenant);
-  }
 }

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Property } from '../../property.model';
-import { PropertiesService } from '../../properties.service';
 
 @Component({
   selector: 'app-property-item',
@@ -9,14 +8,12 @@ import { PropertiesService } from '../../properties.service';
 })
 export class PropertyItemComponent implements OnInit {
   @Input() property: Property;
+  @Input() index: number;
 
-  constructor(private propertiesService: PropertiesService) {}
+  constructor() {}
 
   ngOnInit(): void {
     
   }
 
-  onSelected() {
-    this.propertiesService.propertySelected.emit(this.property);
-  }
 }

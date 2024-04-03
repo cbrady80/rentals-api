@@ -37,4 +37,8 @@ export class TenantsService {
   getTenants() {
     return this.tenants.slice();
   }
+
+  getTenant(index: number) {
+    return this.tenants[index];
+  }
 }

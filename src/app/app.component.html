@@ -1,9 +1,8 @@
-<app-header (featureSelected)="onNavigate($event)"></app-header>
+<app-header></app-header>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-properties *ngIf="loadedFeature === 'properties'"></app-properties>
-      <app-tenants *ngIf="loadedFeature !== 'properties'"></app-tenants>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

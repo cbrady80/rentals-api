@@ -31,4 +31,9 @@ export class PropertyDetailsComponent implements OnInit {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
+  onDeleteProperty() {
+    this.propertiesService.deleteProperty(this.id);
+    this.router.navigate(['/properties']);
+  }
+
 }

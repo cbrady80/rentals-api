@@ -30,4 +30,9 @@ export class TenantDetailsComponent implements OnInit {
   onEditTenant() {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
+
+  onDeleteTenant() {
+    this.tenantsService.deleteTenant(this.id);
+    this.router.navigate(['/tenants']);
+  }
 }

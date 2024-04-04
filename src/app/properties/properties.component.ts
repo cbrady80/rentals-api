@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PropertiesService } from './properties.service';
-
 @Component({
   selector: 'app-properties',
   templateUrl: './properties.component.html',
-  styleUrl: './properties.component.css',
-  providers: [PropertiesService]
+  styleUrl: './properties.component.css'
 })
 export class PropertiesComponent implements OnInit {
 

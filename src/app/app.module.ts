@@ -18,6 +18,8 @@ import { PropertyItemComponent } from './properties/properties-list/property-ite
 import { TenantItemComponent } from './tenants/tenant-list/tenant-item/tenant-item.component';
 import { PropertyStartComponent } from './properties/property-start/property-start.component';
 import { TenantStartComponent } from './tenants/tenant-start/tenant-start.component';
+import { PropertiesService } from './properties/properties.service';
+import { TenantsService } from './tenants/tenants.service';
 
 
 @NgModule({
@@ -44,7 +46,7 @@ import { TenantStartComponent } from './tenants/tenant-start/tenant-start.compon
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [PropertiesService, TenantsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

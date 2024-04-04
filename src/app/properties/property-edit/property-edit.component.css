@@ -1,3 +1,13 @@
+h5 {
+    color: red;
+    font-style: italic;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
 .btn {
     margin: 5px;
 }

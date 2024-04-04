@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Tenant } from './tenant.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TenantsService {
+  tenantsChanged = new Subject<Tenant[]>();
 
   private tenants: Tenant[] = [
     new Tenant(
@@ -41,5 +43,20 @@ export class TenantsService {
 
   getTenant(index: number) {
     return this.tenants[index];
+  }
+
+  addTenant(tenant: Tenant) {
+    this.tenants.push(tenant);
+    this.tenantsChanged.next(this.tenants.slice());
+  }
+
+  updateTenant(index: number, newTenant: Tenant) {
+    this.tenants[index] = newTenant;
+    this.tenantsChanged.next(this.tenants.slice());
+  }
+
+  deleteTenant(index: number) {
+    this.tenants.splice(index, 1);
+    this.tenantsChanged.next(this.tenants.slice());
   }
 }

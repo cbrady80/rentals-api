@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Property } from './property.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropertiesService {
+  propertiesChanged = new Subject<Property[]>();
  
   private properties: Property[] = [
     new Property(
@@ -33,5 +35,20 @@ export class PropertiesService {
 
   getProperty(index: number) {
     return this.properties[index];
+  }
+
+  addProperty(property: Property) {
+    this.properties.push(property);
+    this.propertiesChanged.next(this.properties.slice());
+  }
+
+  updateProperty(index: number, newProperty: Property) {
+    this.properties[index] = newProperty;
+    this.propertiesChanged.next(this.properties.slice());
+  }
+
+  deleteProperty(index: number) {
+    this.properties.splice(index, 1);
+    this.propertiesChanged.next(this.properties.slice());
   }
 }

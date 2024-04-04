@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PropertiesService } from '../properties.service';
+
 
 @Component({
   selector: 'app-property-edit',
@@ -14,7 +15,8 @@ export class PropertyEditComponent implements OnInit {
   propertyForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
-              private propertiesService: PropertiesService) { }
+              private propertiesService: PropertiesService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.route.params
@@ -28,7 +30,24 @@ export class PropertyEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.propertyForm);
+    // const newProperty = new Property(
+    //   this.propertyForm.value['address'],
+    //   this.propertyForm.value['description'],
+    //   this.propertyForm.value['current_tenants'],
+    //   this.propertyForm.value['current_rent'],
+    //   this.propertyForm.value['imagePath'],
+    //   this.propertyForm.value['notes']
+    // );
+    if (this.editMode) {
+      this.propertiesService.updateProperty(this.id, this.propertyForm.value);
+    } else {
+      this.propertiesService.addProperty(this.propertyForm.value);
+    }
+    this.onCancel();
+  }
+
+  onCancel() {
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   private initForm() {
@@ -51,12 +70,12 @@ export class PropertyEditComponent implements OnInit {
     }
 
     this.propertyForm = new FormGroup({
-      'address': new FormControl(propertyAddress),
-      'description': new FormControl(propertyDescription),
-      'current_tenants': new FormControl(propertyCurrent_tenants),
-      'current_rent': new FormControl(propertyCurrent_rent),
-      'imagePath': new FormControl(propertyImagePath),
-      'notes': new FormControl(propertyNotes)
+      'address': new FormControl(propertyAddress, Validators.required),
+      'description': new FormControl(propertyDescription, Validators.required),
+      'current_tenants': new FormControl(propertyCurrent_tenants, Validators.required),
+      'current_rent': new FormControl(propertyCurrent_rent, Validators.required),
+      'imagePath': new FormControl(propertyImagePath, Validators.required),
+      'notes': new FormControl(propertyNotes, Validators.required)
     });
   }
 }

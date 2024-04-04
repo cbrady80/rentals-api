@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TenantsService } from '../tenants.service';
-import { FormControl, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-tenant-edit',
@@ -14,7 +15,8 @@ export class TenantEditComponent implements OnInit {
   tenantForm: FormGroup
 
   constructor(private route: ActivatedRoute,
-              private tenantsService: TenantsService) { }
+              private tenantsService: TenantsService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.route.params
@@ -28,7 +30,16 @@ export class TenantEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.tenantForm);
+    if (this.editMode) {
+      this.tenantsService.updateTenant(this.id, this.tenantForm.value);
+    } else {
+      this.tenantsService.addTenant(this.tenantForm.value);
+    }
+    this.onCancel();
+  }
+
+  onCancel() {
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   private initForm() {
@@ -59,16 +70,16 @@ export class TenantEditComponent implements OnInit {
     }
 
     this.tenantForm = new FormGroup({
-      'name': new FormControl(tenantName),
-      'phone': new FormControl(tenantPhone),
-      'email': new FormControl(tenantEmail),
-      'property': new FormControl(tenantProperty),
-      'current_rent': new FormControl(tenantCurrent_rent),
-      'lease_period': new FormControl(tenantLease_period),
-      'co_tenants': new FormControl(tenantCo_tenants),
-      'emergency_contact': new FormControl(tenantEmergency_contact),
-      'pets': new FormControl(tenantPets),
-      'notes': new FormControl(tenantNotes)
+      'name': new FormControl(tenantName, Validators.required),
+      'phone': new FormControl(tenantPhone, Validators.required),
+      'email': new FormControl(tenantEmail, Validators.required),
+      'property': new FormControl(tenantProperty, Validators.required),
+      'current_rent': new FormControl(tenantCurrent_rent, Validators.required),
+      'lease_period': new FormControl(tenantLease_period, Validators.required),
+      'co_tenants': new FormControl(tenantCo_tenants, Validators.required),
+      'emergency_contact': new FormControl(tenantEmergency_contact, Validators.required),
+      'pets': new FormControl(tenantPets, Validators.required),
+      'notes': new FormControl(tenantNotes, Validators.required)
     });
   }
 }

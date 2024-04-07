@@ -6,11 +6,8 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.sendFile(path.join(__dirname, './dist/cms/browser/index.html'));
+    res.sendFile(path.join(__dirname, './dist/rentals-api/browser/index.html'));
   });
-
-  // // USE request for HOME page
-// router.use('/', index);
 
 // USE request for PROPERTIES
 router.use('/properties', require('./properties'));

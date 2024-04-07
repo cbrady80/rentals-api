@@ -12,11 +12,12 @@ const getAllTenants = async (req, res) => {
         .db('realEstate')
         .collection('tenants')
         .find();
-        result.toArray().then(
-            lists => {res.setHeader('Content-Type', 'application/json'); 
-                      res.status(200).json(lists)},
-            err => {res.status(400).json({ message: err })}
-        );
+        result.toArray().then(lists => {
+            res.status(200).json({
+                message: 'All tenants fetched from db!',
+                tenants: lists
+            });
+        });
 };
 
 // Function to retrive one tenant by ID
@@ -30,23 +31,27 @@ const getTenantById = async (req, res, next) => {
         .db('realEstate')
         .collection('tenants')
         .find({_id: tenantId});
-        result.toArray().then(
-            lists => {res.setHeader('Content-Type', 'application/json'); 
-                      res.status(200).json(lists[0])},
-            err => {res.status(400).json({ message: err })}
-        );
+        result.toArray().then(lists => { 
+            res.status(200).json({
+                message: 'Fetched tenant from db by id.',
+                property: lists[0]
+            });
+        });
 };
 
 // Function to create a NEW tenant
 const newTenant = async (req, res, next) => {
     const tenant = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        name: req.body.name,
+        phone: req.body.phone,
         email: req.body.email,
-        propertyAddr: req.body.propertyAddr,
-        monthlyRent: req.body.monthlyRent,
-        leaseStart: req.body.leaseStart,
-        leaseEnd: req.body.leaseEnd
+        property: req.body.property,
+        current_rent: req.body.current_rent,
+        lease_period: req.body.lease_period,
+        co_tenants: req.body.co_tenants,
+        emergency_contact: req.body.emergency_contact,
+        pets: req.body.pets,
+        notes: req.body.notes
     };
 
     const result = await mongodb
@@ -64,19 +69,22 @@ const newTenant = async (req, res, next) => {
 
 // Function to UPDATE an exsisting tenant
 const updateTenant = async (req, res, next) => {
-    if (!ObjectId.isValid(req.params.id)) {  //data validation - week 6
-        res.status(400).json('Must use a valid id to update a tenant.');
-    }
+    // if (!ObjectId.isValid(req.params.id)) {  //data validation - week 6
+    //     res.status(400).json('Must use a valid id to update a tenant.');
+    // }
     const tenantId = new ObjectId(req.params.id);
 
     const tenant = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        name: req.body.name,
+        phone: req.body.phone,
         email: req.body.email,
-        propertyAddr: req.body.propertyAddr,
-        monthlyRent: req.body.monthlyRent,
-        leaseStart: req.body.leaseStart,
-        leaseEnd: req.body.leaseEnd
+        property: req.body.property,
+        current_rent: req.body.current_rent,
+        lease_period: req.body.lease_period,
+        co_tenants: req.body.co_tenants,
+        emergency_contact: req.body.emergency_contact,
+        pets: req.body.pets,
+        notes: req.body.notes
     };
 
     const result = await mongodb
@@ -98,23 +106,19 @@ const updateTenant = async (req, res, next) => {
 
 // Function to DELETE an existing tenant
 const deleteTenant = async (req, res, next) => {
-    if (!ObjectId.isValid(req.params.id)) {  //data validation - week 6
-        res.status(400).json('Must use a valid id to delete a tenant.');
-    }
-    const tenantId = new ObjectId(req.params.id);
+    // const tenantId = new ObjectId(req.params.id);
+    const tenantName = req.params.name
+    console.log("tenant params name: " + tenantName)
 
     const result = await mongodb
         .getDb()
         .db('realEstate')
         .collection('tenants')
-        .deleteOne({_id: tenantId});
-
-    console.log(result);
-    if (result.deletedCount > 0) {
-        res.status(200).send();
-    } else {
-        res.status(500).json(result.error || 'An error occurred.  Tenant not deleted.');
-    };
+        .deleteOne({'name': tenantName})
+        .then(result => {
+            console.log(result);
+            res.status(200).json({message: 'Tenant deleted from db!'});
+        });
 };
 
 

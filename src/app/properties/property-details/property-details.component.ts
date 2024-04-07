@@ -25,6 +25,7 @@ export class PropertyDetailsComponent implements OnInit {
           this.property = this.propertiesService.getProperty(this.id);
         }
       );
+      console.log("property id = " + this.id);
   }
 
   onEditProperty() {
@@ -32,7 +33,7 @@ export class PropertyDetailsComponent implements OnInit {
   }
 
   onDeleteProperty() {
-    this.propertiesService.deleteProperty(this.id);
+    this.propertiesService.deleteProperty(this.property);
     this.router.navigate(['/properties']);
   }
 

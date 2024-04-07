@@ -32,7 +32,7 @@ export class TenantDetailsComponent implements OnInit {
   }
 
   onDeleteTenant() {
-    this.tenantsService.deleteTenant(this.id);
+    this.tenantsService.deleteTenant(this.tenant);
     this.router.navigate(['/tenants']);
   }
 }

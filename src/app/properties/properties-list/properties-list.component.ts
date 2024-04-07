@@ -18,13 +18,14 @@ export class PropertiesListComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute) {  }
 
   ngOnInit(): void {
+    this.propertiesService.getProperties();
     this.subscription = this.propertiesService.propertiesChanged
       .subscribe(
         (properties: Property[]) => {
           this.properties = properties;
         }
       );
-    this.properties = this.propertiesService.getProperties();
+    
   }
 
   onAddProperty() {

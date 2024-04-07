@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PropertiesService } from '../properties.service';
+import { Property } from '../property.model';
 
 
 @Component({
@@ -39,8 +40,10 @@ export class PropertyEditComponent implements OnInit {
     //   this.propertyForm.value['notes']
     // );
     if (this.editMode) {
+      // this.propertiesService.updateProperty(this.id, newProperty);
       this.propertiesService.updateProperty(this.id, this.propertyForm.value);
     } else {
+      // this.propertiesService.addProperty(newProperty);
       this.propertiesService.addProperty(this.propertyForm.value);
     }
     this.onCancel();

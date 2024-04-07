@@ -18,13 +18,14 @@ export class TenantListComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute) {  }
 
   ngOnInit(): void {
+    this.tenantsService.getTenants();
     this.subscription = this.tenantsService.tenantsChanged
       .subscribe(
         (tenants: Tenant[]) => {
           this.tenants = tenants;
         }
       );
-    this.tenants = this.tenantsService.getTenants();
+    
   }
 
   onAddTenant() {

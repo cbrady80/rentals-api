@@ -22,7 +22,7 @@ router.post('/', propertiesController.newProperty);
 router.put('/:id', propertiesController.updateProperty);
 
 //Route for deleting a property - DELETE
-router.delete('/:address', propertiesController.deleteProperty);
+router.delete('/:id', propertiesController.deleteProperty);
 
 
 

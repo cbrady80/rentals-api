@@ -14,6 +14,8 @@ export class PropertyEditComponent implements OnInit {
   id: number;
   editMode = false;
   propertyForm: FormGroup;
+  originalProperty: Property;
+  property: Property;
 
   constructor(private route: ActivatedRoute,
               private propertiesService: PropertiesService,
@@ -26,27 +28,19 @@ export class PropertyEditComponent implements OnInit {
           this.id = +params['id'];
           this.editMode = params['id'] != null;
           this.initForm();
+          this.property = this.propertiesService.getProperty(this.id);
         }
       );
   }
 
   onSubmit() {
-    // const newProperty = new Property(
-    //   this.propertyForm.value['address'],
-    //   this.propertyForm.value['description'],
-    //   this.propertyForm.value['current_tenants'],
-    //   this.propertyForm.value['current_rent'],
-    //   this.propertyForm.value['imagePath'],
-    //   this.propertyForm.value['notes']
-    // );
-    if (this.editMode) {
-      // this.propertiesService.updateProperty(this.id, newProperty);
-      this.propertiesService.updateProperty(this.id, this.propertyForm.value);
-    } else {
-      // this.propertiesService.addProperty(newProperty);
-      this.propertiesService.addProperty(this.propertyForm.value);
-    }
-    this.onCancel();
+      if (this.editMode) {
+        this.propertiesService.updateProperty(this.id, this.propertyForm.value, this.property);
+        this.router.navigate(['/properties']);
+      } else {
+        this.propertiesService.addProperty(this.propertyForm.value);
+        this.onCancel();
+      }
   }
 
   onCancel() {

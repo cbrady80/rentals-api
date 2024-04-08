@@ -3,7 +3,7 @@
 
 const { response } = require('express');
 const mongodb = require('../db/connection');
-const ObjectId = require('mongodb').ObjectId;
+const mongoObjectId = require('mongodb').ObjectId;
 
 // Function to retrieve all tenants
 const getAllTenants = async (req, res) => {
@@ -22,9 +22,7 @@ const getAllTenants = async (req, res) => {
 
 // Function to retrive one tenant by ID
 const getTenantById = async (req, res, next) => {
-    if (!ObjectId.isValid(req.params.id)) {  //data validation - week 6
-        res.status(400).json('Must use a valid id to find a tenant.');
-    }
+    
     const tenantId = new ObjectId(req.params.id);
     const result = await mongodb
         .getDb()
@@ -69,10 +67,8 @@ const newTenant = async (req, res, next) => {
 
 // Function to UPDATE an exsisting tenant
 const updateTenant = async (req, res, next) => {
-    // if (!ObjectId.isValid(req.params.id)) {  //data validation - week 6
-    //     res.status(400).json('Must use a valid id to update a tenant.');
-    // }
-    const tenantId = new ObjectId(req.params.id);
+    // const tenantId = new ObjectId(req.params.id);
+    const id = req.params['id'];
 
     const tenant = {
         name: req.body.name,
@@ -92,7 +88,7 @@ const updateTenant = async (req, res, next) => {
         .db('realEstate')
         .collection('tenants')
         .updateOne(
-            {_id: tenantId},
+            {"_id": new mongoObjectId(id)},
             {$set: tenant}
         );
 
@@ -107,14 +103,13 @@ const updateTenant = async (req, res, next) => {
 // Function to DELETE an existing tenant
 const deleteTenant = async (req, res, next) => {
     // const tenantId = new ObjectId(req.params.id);
-    const tenantName = req.params.name
-    console.log("tenant params name: " + tenantName)
+    const id = req.params['id'];
 
     const result = await mongodb
         .getDb()
         .db('realEstate')
         .collection('tenants')
-        .deleteOne({'name': tenantName})
+        .deleteOne({"_id": new mongoObjectId(id)})
         .then(result => {
             console.log(result);
             res.status(200).json({message: 'Tenant deleted from db!'});

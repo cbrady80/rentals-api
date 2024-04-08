@@ -60,12 +60,26 @@ export class TenantsService {
         console.log(responseData.message);
         this.tenants.push(tenant);
         this.tenantsChanged.next(this.tenants.slice());
+        console.log('Tenant added!');
       });
   }
 
-  updateTenant(index: number, newTenant: Tenant) {
-    this.tenants[index] = newTenant;
-    this.tenantsChanged.next(this.tenants.slice());
+  updateTenant(index: number, newTenant: Tenant, originalTenant: Tenant) {
+    const position = this.tenants.indexOf(originalTenant);
+    if (position < 0) {
+      return;
+    }
+    // set the id of the new Document to the id of the old Document
+    newTenant._id = originalTenant._id;
+    
+    this.http
+      .put('http://localhost:3000/tenants/' + newTenant._id, newTenant)
+      .subscribe(() => {
+        this.tenants[index] = newTenant;
+        this.tenantsChanged.next(this.tenants.slice());
+        console.log('Tenant updated!');
+      })
+      
   }
 
   deleteTenant(tenant: Tenant) {
@@ -74,10 +88,8 @@ export class TenantsService {
       return;
     }
 
-    console.log("tenant name = " + tenant.name)
-
     this.http
-      .delete('http://localhost:3000/tenants/' + tenant.name)
+      .delete('http://localhost:3000/tenants/' + tenant._id)
       .subscribe(() => {
         this.tenants.splice(position, 1);
         this.tenantsChanged.next(this.tenants.slice());

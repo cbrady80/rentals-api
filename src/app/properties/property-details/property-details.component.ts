@@ -25,7 +25,6 @@ export class PropertyDetailsComponent implements OnInit {
           this.property = this.propertiesService.getProperty(this.id);
         }
       );
-      console.log("property id = " + this.id);
   }
 
   onEditProperty() {

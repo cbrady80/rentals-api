@@ -22,7 +22,7 @@ router.post('/', tenantsController.newTenant);
 router.put('/:id', tenantsController.updateTenant);
 
 //Route for deleting a tenant - DELETE
-router.delete('/:name', tenantsController.deleteTenant);
+router.delete('/:id', tenantsController.deleteTenant);
 
 
 // Exports

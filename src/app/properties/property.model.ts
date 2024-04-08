@@ -1,7 +1,7 @@
 export class Property {
     
     constructor(
-        // public id: string,
+        public _id: string,
         public address: string,
         public description: string,
         public current_tenants: string,

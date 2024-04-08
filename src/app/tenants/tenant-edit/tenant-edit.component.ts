@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TenantsService } from '../tenants.service';
+import { Tenant } from '../tenant.model';
 
 
 @Component({
@@ -12,7 +13,9 @@ import { TenantsService } from '../tenants.service';
 export class TenantEditComponent implements OnInit {
   id: number;
   editMode = false;
-  tenantForm: FormGroup
+  tenantForm: FormGroup;
+  originalTenant: Tenant;
+  tenant: Tenant;
 
   constructor(private route: ActivatedRoute,
               private tenantsService: TenantsService,
@@ -25,17 +28,19 @@ export class TenantEditComponent implements OnInit {
           this.id = +params['id'];
           this.editMode = params['id'] != null;
           this.initForm();
+          this.tenant = this.tenantsService.getTenant(this.id);
         }
       );
   }
 
   onSubmit() {
     if (this.editMode) {
-      this.tenantsService.updateTenant(this.id, this.tenantForm.value);
+      this.tenantsService.updateTenant(this.id, this.tenantForm.value, this.tenant);
+      this.router.navigate(['/tenants']);
     } else {
       this.tenantsService.addTenant(this.tenantForm.value);
+      this.onCancel();
     }
-    this.onCancel();
   }
 
   onCancel() {

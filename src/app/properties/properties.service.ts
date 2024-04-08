@@ -52,12 +52,25 @@ export class PropertiesService {
           console.log(responseData.message);
           this.properties.push(property);
           this.propertiesChanged.next(this.properties.slice());
+          console.log('Property added!');
       });
   }
 
-  updateProperty(index: number, newProperty: Property) {
-    this.properties[index] = newProperty;
-    this.propertiesChanged.next(this.properties.slice());
+  updateProperty(index: number, newProperty: Property, originalProperty: Property) {
+    const position = this.properties.indexOf(originalProperty);
+    if (position < 0) {
+      return;
+    }
+    // set the id of the new Document to the id of the old Document
+    newProperty._id = originalProperty._id;
+
+    this.http
+      .put('http://localhost:3000/properties/' + newProperty._id, newProperty)
+      .subscribe(() => {
+        this.properties[index] = newProperty;
+        this.propertiesChanged.next(this.properties.slice());
+        console.log('Property updated!');
+      }); 
   }
 
   deleteProperty(property: Property) {
@@ -67,7 +80,7 @@ export class PropertiesService {
     }
 
     this.http
-      .delete('http://localhost:3000/properties/' + property.address)
+      .delete('http://localhost:3000/properties/' + property._id) //property['_id']
       .subscribe(() => {
         this.properties.splice(position, 1);
         this.propertiesChanged.next(this.properties.slice());

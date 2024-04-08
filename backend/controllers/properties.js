@@ -3,7 +3,7 @@
 
 const { response } = require('express');
 const mongodb = require('../db/connection');
-const ObjectId = require('mongodb').ObjectId;
+let mongoObjectId = require('mongodb').ObjectId;
 
 // Function to retrieve all properties
 const getAllProperties = async (req, res, next) => {
@@ -64,10 +64,8 @@ const newProperty = async (req, res, next) => {
 
 // Function to UPDATE an exsisting property
 const updateProperty = async (req, res, next) => {
-    // if (!ObjectId.isValid(req.params.id)) {  
-    //     res.status(400).json('Must use a valid id to update a property.');
-    // }
-    const propertyId = new ObjectId(req.params.id);
+    // const propertyId = new ObjectId(req.params.id);
+    const id = req.params['id'];
 
     const property = {
         address: req.body.address,
@@ -83,7 +81,7 @@ const updateProperty = async (req, res, next) => {
         .db('realEstate')
         .collection('properties')
         .updateOne(
-            {_id: propertyId},
+            {"_id": new mongoObjectId(id)},
             {$set: property}
         );
 
@@ -97,15 +95,13 @@ const updateProperty = async (req, res, next) => {
 
 // Function to DELETE an existing property
 const deleteProperty = async (req, res, next) => {
-    // const propertyId = ObjectId();
-    const propAddr = req.params.address
-    // console.log("property address from params = " + propAddr);
-
+    const id = req.params['id'];
+    
     const result = await mongodb
         .getDb()
         .db('realEstate')
         .collection('properties')
-        .deleteOne({'address': propAddr})
+        .deleteOne({"_id": new mongoObjectId(id)})
         .then(result => {
             console.log(result);
             res.status(200).json({message: 'Property deleted from db!'});
